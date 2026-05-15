@@ -42,13 +42,14 @@ export default function App() {
    setCurrentPage(selected + 1);
  };
 
+  const totalPages = data?.total_pages ?? 0;
   return (
     <>
     
       <Toaster />
 
       <SearchBar onSubmit={handleSearch} />
-      
+
       {isLoading && <Loader />}
 
       {isError && <ErrorMessage message="Something went wrong" />}
@@ -62,7 +63,7 @@ export default function App() {
 
   <ReactPaginate
 
-    pageCount={data?.total_pages || 0}
+    pageCount={totalPages}
 
     pageRangeDisplayed={5}
 
