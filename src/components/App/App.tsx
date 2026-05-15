@@ -46,18 +46,20 @@ export default function App() {
     <>
     
       <Toaster />
-      <SearchBar onSubmit={handleSearch} />
 
+      <SearchBar onSubmit={handleSearch} />
+      
       {isLoading && <Loader />}
 
       {isError && <ErrorMessage message="Something went wrong" />}
+
 
       {!isLoading && !isError && data?.results?.length > 0 && (
 
         <MovieGrid movies={data.results} onSelect={setSelectedMovie} />
 
       )}
-{!isLoading && !isError && data?.results?.length === 0 && (
+
   <ReactPaginate
 
     pageCount={data?.total_pages || 0}
@@ -75,7 +77,7 @@ export default function App() {
     nextLabel=">"
 
   />
-)}
+
       {selectedMovie && (
 
         <MovieModal
