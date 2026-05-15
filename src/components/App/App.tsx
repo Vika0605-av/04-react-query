@@ -57,7 +57,7 @@ export default function App() {
         <MovieGrid movies={data.results} onSelect={setSelectedMovie} />
 
       )}
-{data?.results.length > 0 && (
+{!isLoading && !isError && data?.results.length === 0 && (
   <ReactPaginate
 
     pageCount={data.total_pages}
