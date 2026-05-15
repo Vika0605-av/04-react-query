@@ -55,9 +55,9 @@ export default function App() {
       {isError && <ErrorMessage message="Something went wrong" />}
 
 
-      {!isLoading && !isError && data?.results?.length > 0 && (
+      {!isLoading && !isError && (data?.results?.length ?? 0) > 0 && (
 
-        <MovieGrid movies={data.results} onSelect={setSelectedMovie} />
+        <MovieGrid movies ={data?.results?? []} onSelect={setSelectedMovie} />
 
       )}
 
