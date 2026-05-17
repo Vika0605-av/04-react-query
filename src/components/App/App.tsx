@@ -15,24 +15,31 @@ import { ErrorMessage } from '../../components/ErrorMessage/ErrorMessage';
 
 import { MovieModal } from '../../components/MovieModal/MovieModal';
 
-import  { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, keepPreviousData } from '@tanstack/react-query';
 
 import ReactPaginate from 'react-paginate';
+
+import { useEffect } from 'react';
+
 
 export default function App() {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const {data, isLoading, isError} = useQuery({
+  const {data, isLoading, isError, isSuccess} = useQuery({
     queryKey: ['movies', searchQuery, currentPage],
     queryFn: () => fetchMovies(searchQuery, currentPage),
     enabled: !!searchQuery,
+    placeholderData: keepPreviousData,
   })
-
+useEffect(() => {
+  if (isSuccess && (data?.results?.length ?? 0) === 0) {
+    toast.error('No movies found');
+  }
+}, [isSuccess, data]);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
     setCurrentPage(1);

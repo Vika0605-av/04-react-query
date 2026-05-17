@@ -3,10 +3,10 @@ import axios from 'axios';
 
 import type { Movie } from "../types/movie";
 
-interface MoviesResponse {
-
+export interface MovieResponse {
     results: Movie[];
-
+    total_pages: number;
+    
 }
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -19,7 +19,7 @@ export const fetchMovies = async (
 
 ): Promise<Movie[]> => {
 
-    const response = await axios.get<MoviesResponse>(
+    const response = await axios.get<MovieResponse>(
 
         `${BASE_URL}/search/movie`,
 
