@@ -15,7 +15,8 @@ const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
 export const fetchMovies = async (
 
-    query: string
+    query: string,
+    page: number = 1
 
 ): Promise<Movie[]> => {
 
@@ -27,6 +28,7 @@ export const fetchMovies = async (
 
             params: {
                 query,
+                page,
                 include_adult: false,
             },
 
