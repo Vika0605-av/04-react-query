@@ -16,9 +16,9 @@ const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 export const fetchMovies = async (
 
     query: string,
-    page: number = 1
+    page: number
 
-): Promise<Movie[]> => {
+): Promise<MovieResponse> => {
 
     const response = await axios.get<MovieResponse>(
 
@@ -42,5 +42,5 @@ export const fetchMovies = async (
 
     );
 
-    return response.data.results;
+    return response.data;
 };
